@@ -1,91 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>POPCAT CLASSIC</title>
     <style>
-        /*容器 box 高度100vh flex排版方向column 置中*/
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-        }
 
-        /*容器樣式 背景顏色 #bdaa90*/
-        .container {
-            background-color: #bdaa90;
-        }
-
-        /*標題 box 寬度80% 上方間距 2em*/
-        .title {
-            width: 80%;
-            margin-top: 2em;
-        }
-
-        /*文字 box 寬度100%*/
-        .cat-img {
-            width: 100%;
-        }
-
-        /*文字樣式 文字置中 文字白色 大小80px -webkit-text-stroke 3px 黑色*/
-        .cat-img {
-            color: white;
-            font-size: 80px;
-            text-align: center;
-            -webkit-text-stroke: 3px black;
-        }
-
-        /*文字 div 背景圖片 用 id 設定imgs/p.png 圖片靠下 填滿容器contain 不重複*/
-        #p {
-            background-image: url('imgs/p.png');
-            background-position: center bottom;
-            background-size: contain;
-            background-repeat: no-repeat;
-        }
-
-        /*body box 編距為0*/
+        /* 1. 基本設定 */
         body {
+            /* 移除預設邊距 */
             margin: 0;
-        }
-
-        /*文字 div 排版填滿剩餘空間*/
-        .cat-img {
-            flex: 1;
-        }
-
-        /*字型 sans-serif*/
-        body {
+            /* 設定字體 */
             font-family: sans-serif;
         }
 
-        /*防止文字被選取*/
-        .cat-img {
+        .container {
+            /* 設定背景色 */
+            background-color: #bdaa90;
+            /* 防止文字被選取 */
             user-select: none;
+
+            /* 讓內容佔滿整個視窗 */
+            height: 100vh;
+
+            /* 垂直排列內容 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /*標題 box 最大寬度 600px*/
+        /* 2. 標題圖片 */
         .title {
+            /* 上方間距 */
+            margin-top: 2em;
+
+            /* 寬度設定 */
+            width: 80%;
             max-width: 600px;
         }
 
-        /*文字 box 最大寬度 800px*/
+        /* 3. 貓咪圖片 */
         .cat-img {
+            /* 填滿剩餘空間 */
+            flex: 1;
+
+            /* 寬度設定 */
+            width: 100%;
             max-width: 800px;
+
+            /* 背景圖片設定 */
+            background-position: bottom;
+            background-size: contain;
+            background-repeat: no-repeat;
+
+            /* 文字置中 */
+            text-align: center;
+            /* 文字樣式 */
+            color: white;
+            font-size: 80px;
+            font-weight: 900;
+            -webkit-text-stroke: 3px black;
+
         }
 
-        /*新贈文字 div 背景圖片 用 id 設定 imgs/op.png*/
+        /* 4. 貓咪狀態 */
+        #p {
+            background-image: url("imgs/p.png");
+        }
         #op {
             background-image: url("imgs/op.png");
         }
+
     </style>
+
 </head>
 
 <body>
-<!--新增容器去包裹標題圖片與點擊數-->
 <div class="container">
     <img class="title" src="imgs/popcat.svg" alt="POPCAT">
-    <div class="cat-img" id="p">0</div>
+    <div class="cat-img" id="p">0202</div>
 </div>
+
+<script>
+    // 計數器基本邏輯
+    let count = 0;
+
+    // 計數器+1 function
+    document.addEventListener('mousedown', function () {
+        count++;
+    });
+
+    // 將初始化計數器顯示到 HTML 元素，用 id 抓取
+    document.getElementById('p').innerText = count;
+
+    // 滑鼠按下的時候，更新計數器的顯示
+    document.addEventListener('mousedown', function () {
+        document.getElementById('p').innerText = count;
+    });
+
+    // 當滑鼠按下，切換張嘴圖片
+    document.addEventListener('mousedown', function () {
+        document.getElementById('p').style.backgroundImage = "url('imgs/op.png')";
+    });
+
+    // 當滑鼠放開，便恢復原來圖片
+    document.addEventListener('mouseup', function () {
+        document.getElementById('p').style.backgroundImage = "url('imgs/p.png')";
+    });
+
+    // 當滑鼠按下，播放 pops/pop1.mp3
+    document.addEventListener('mousedown', function () {
+        new Audio('pops/pop1.mp3').play();
+    });
+
+</script>
 </body>
 </html>
